@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KEITH-MD</title>
+  <meta name="theme-color" content="#f0a500">
+  <meta name="description" content="Pairing session for KEITH-MD.">
+  <meta name="author" content="keithkeizzah">
+  <meta name="robots" content="all">
+  <meta name="robots schedule" content="auto">
+  <meta name="distribution" content="global">
+  <meta name="googlebot" content="index,follow">
+  <meta property="og:title" content="KEITH-MD"/>
+  <meta name="description" content=" [+] Pairing session for KEITH-MD [+] ">
+  <meta property="og:image" content="/bg.jpg">
+  <link href="/style.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/icone.jpg">
+
+  <style>
+    /* External Font Imports */
+    @import url('https://fonts.googleapis.com/css?family=Rancho&effect=shadow-multiple|3d-float');
+    @import url('https://fonts.googleapis.com/css2?family=Aladin&family=Grenze+Gotisch:wght@900&family=Jolly+Lodger&family=New+Rocker&display=swap');
+
+    /* Body Styling */
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+      margin: 0;
+      background-image: url("https://telegra.ph/file/562546f7d700f4f4798f1.jpg");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      color: #f0f0f0;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    /* Header Styling */
+    header {
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 50px;
+    }
+
+    h1 {
+      font-family: 'New Rocker', cursive;
+      font-size: 3.2em;
+      color: #ff6347;
+      margin: 0;
+      text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000;
+    }
+
+    h2 {
+      font-family: 'Fira Code', sans-serif;
+      font-size: 1em;
+      color: #87ceeb;
+      margin: 5px 0 30px;
+      opacity: 0.8;
+    }
+
+    /* Audio Container Styling */
+    .audio-container {
+      margin-top: 50px;
+    }
+
+    .audio-container h2 {
+      color: #f0f0f0;
+      font-family: 'Courier New', Courier, monospace;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* Playlist Styling */
+    .playlist {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #f0f0f0;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      max-height: 80%;
+      overflow-y: auto;
+    }
+
+    .playlist h3 {
+      font-family: 'Aladin', sans-serif;
+      color: #ff6347;
+      margin-bottom: 20px;
+    }
+
+    .playlist a {
+      color: #87ceeb;
+      text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1.1em;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .playlist a:hover {
+      color: #ff6347;
+    }
+
+    /* Button Styling */
+    .btn {
+      width: 180px;
+      padding: 0.6em 1.5em;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      border-radius: 6px;
+      border: 1px solid #ff6347;
+      transition: 0.5s;
+      font-weight: 500;
+      font-size: 15px;
+      font-family: 'Fira Code', monospace;
+      text-transform: uppercase;
+      color: #ff6347;
+      margin-bottom: 15px;
+      text-align: center;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn:hover {
+      color: #000;
+      font-weight: 600;
+    }
+
+    .btn:active {
+      filter: brightness(0.7);
+      transform: scale(0.98);
+    }
+
+    /* Footer Styling */
+    footer {
+      position: absolute;
+      bottom: 10px;
+      text-align: center;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.8em;
+      color: light green;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1 id="titre">KEITH-MD</h1>
+    <h2>𝙿𝚛𝚘𝚟𝚒𝚍𝚎𝚜 𝚋𝚎𝚜𝚝 𝚠𝚊 𝚋𝚘𝚝𝚜 𝚎𝚟𝚎𝚛 𝚒𝚗 𝚑𝚒𝚜𝚝𝚘𝚛𝚢</h2>
+  </header>
+
+  <!-- Audio Container -->
+  <div class="audio-container">
+    <h2>Audio Player</h2>
+    <audio controls>
+      <source src="https://files.catbox.moe/utbujd.mp3" type="audio/mp3">
+      <source src="https://files.catbox.moe/w2j17k.m4a" type="audio/m4a">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <!-- Playlist Section -->
+  <div class="playlist">
+    <h3>Audio Playlist</h3>
+    <a href="https://files.catbox.moe/utbujd.mp3" target="_blank">Track 1: utbujd.mp3</a>
+    <a href="https://files.catbox.moe/w2j17k.m4a" target="_blank">Track 2: w2j17k.m4a</a>
+    <a href="https://files.catbox.moe/851skv.m4a" target="_blank">Track 3: 851skv.m4a</a>
+    <a href="https://files.catbox.moe/qnhtbu.m4a" target="_blank">Track 4: qnhtbu.m4a</a>
+    <a href="https://files.catbox.moe/lb0x7w.mp3" target="_blank">Track 5: lb0x7w.mp3</a>
+    <!-- Add more tracks as needed -->
+  </div>
+
+  <!-- Buttons -->
+  <a href="/pair" class="btn">PAIR CODE</a>
+  <a href="/qr" class="btn">QR CODE</a>
+  <a href="https://github.com/keithkeizzah/ALPHA-MD1" class="btn">ALPHA-MD</a>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2024 | keithkeizzah
+  </footer>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('show');
+    }
+
+    function redirigerVersWhatsApp() {
+      window.location.href = "https://wa.me/+254748387615";
+    }
+  </script>
+</body>
+
+</html>
