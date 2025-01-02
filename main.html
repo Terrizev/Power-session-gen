@@ -4,144 +4,175 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Silva Tech Inc</title>
-  <meta name="theme-color" content="#6a0dad">
+  <meta name="theme-color" content="#6a1b9a">
   <meta name="description" content="Welcome to Silva Tech Inc - Home of Silva MD Bot and Silva Spark MD.">
   <meta name="author" content="Silva Tech Inc">
-  <meta name="robots" content="all">
-  <meta name="distribution" content="global">
-  <meta property="og:title" content="Silva Tech Inc - Bots for the Future"/>
-  <meta property="og:image" content="https://i.imgur.com/PEZ5QL2.jpeg">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
-  <link rel="shortcut icon" href="https://i.imgur.com/PEZ5QL2.jpeg">
+  <link href="/style.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/silva-logo.png">
+
   <style>
-    /* General Styling */
+    /* External Font Imports */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+    /* Body Styling */
     body {
       margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #6a0dad, #8b5cf6);
-      color: #fff;
-      text-align: center;
-      overflow-x: hidden;
+      font-family: 'Roboto', sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
     }
 
+    /* Header Styling */
     header {
-      padding: 20px 10px;
-      background-color: rgba(0, 0, 0, 0.7);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      padding: 20px 0;
     }
 
-    header h1 {
-      font-size: 3rem;
-      margin: 0;
-      color: #fff;
-      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+    header img {
+      width: 120px;
+      margin-bottom: 20px;
     }
 
-    header h2 {
+    h1 {
+      font-size: 2.5rem;
+      color: #6a1b9a;
+    }
+
+    h2 {
       font-size: 1.2rem;
-      margin: 10px 0 0;
       color: #d1c4e9;
     }
 
-    .container {
+    /* Audio Playlist Styling */
+    .audio-playlist {
+      background-color: #1e1e1e;
+      border-radius: 8px;
       padding: 20px;
+      width: 90%;
+      max-width: 600px;
+      margin: 30px 0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
 
+    .audio-playlist h3 {
+      font-size: 1.5rem;
+      color: #6a1b9a;
+      margin-bottom: 15px;
+    }
+
+    .track {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+    }
+
+    .track:hover {
+      background-color: #333333;
+    }
+
+    .track img {
+      width: 50px;
+      height: 50px;
+      border-radius: 4px;
+      margin-right: 15px;
+    }
+
+    .track-details {
+      flex: 1;
+    }
+
+    .track-details p {
+      margin: 0;
+    }
+
+    .track-details .title {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #ffffff;
+    }
+
+    .track-details .artist {
+      font-size: 0.9rem;
+      color: #b0b0b0;
+    }
+
+    /* Button Styling */
     .btn {
-      display: inline-block;
-      padding: 10px 20px;
-      margin: 10px;
-      background: rgba(0, 0, 0, 0.5);
-      border: 2px solid #fff;
-      border-radius: 5px;
-      color: #fff;
-      font-weight: 600;
+      display: block;
+      width: 200px;
+      padding: 10px;
+      margin: 10px auto;
+      background-color: #6a1b9a;
+      color: #ffffff;
+      text-align: center;
       text-decoration: none;
-      transition: all 0.3s ease;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background-color 0.3s;
     }
 
     .btn:hover {
-      background: #fff;
-      color: #6a0dad;
+      background-color: #4a148c;
     }
 
-    .audio-container {
-      margin: 30px auto;
-      max-width: 600px;
-    }
-
-    .audio-container audio {
-      width: 100%;
-    }
-
-    .playlist {
-      margin: 20px auto;
-      padding: 15px;
-      max-width: 300px;
-      background: rgba(0, 0, 0, 0.5);
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    }
-
-    .playlist h3 {
-      margin-bottom: 15px;
-      font-size: 1.5rem;
-    }
-
-    .playlist a {
-      display: block;
-      margin: 5px 0;
-      color: #d1c4e9;
-      text-decoration: none;
-    }
-
-    .playlist a:hover {
-      color: #fff;
-    }
-
+    /* Footer Styling */
     footer {
-      margin-top: 20px;
+      margin-top: auto;
+      text-align: center;
       padding: 10px;
-      background: rgba(0, 0, 0, 0.8);
-      color: #d1c4e9;
       font-size: 0.9rem;
+      color: #b0b0b0;
     }
+
   </style>
 </head>
+
 <body>
   <header>
-    <h1>Silva Tech Inc</h1>
-    <h2>Innovation Redefined - Silva MD Bot & Silva Spark MD</h2>
+    <img src="/silva-logo.png" alt="Silva Tech Inc Logo">
+    <h1>Welcome to Silva Tech Inc</h1>
+    <h2>Home of Silva MD Bot and Silva Spark MD</h2>
   </header>
 
-  <div class="container">
-    <h2>Audio Player</h2>
-    <div class="audio-container">
-      <audio controls>
-        <source src="https://files.catbox.moe/utbujd.mp3" type="audio/mp3">
-        <source src="https://files.catbox.moe/w2j17k.m4a" type="audio/m4a">
-        Your browser does not support the audio element.
-      </audio>
-    </div>
-
-    <div class="playlist">
-      <h3>Audio Playlist</h3>
-      <a href="https://files.catbox.moe/utbujd.mp3" target="_blank">Track 1: utbujd.mp3</a>
-      <a href="https://files.catbox.moe/w2j17k.m4a" target="_blank">Track 2: w2j17k.m4a</a>
-      <a href="https://files.catbox.moe/851skv.m4a" target="_blank">Track 3: 851skv.m4a</a>
-      <a href="https://files.catbox.moe/qnhtbu.m4a" target="_blank">Track 4: qnhtbu.m4a</a>
-      <a href="https://files.catbox.moe/lb0x7w.mp3" target="_blank">Track 5: lb0x7w.mp3</a>
-    </div>
-
+  <!-- Priority Interaction Section -->
+  <div>
     <a href="/pair" class="btn">Pair Code</a>
     <a href="/qr" class="btn">QR Code</a>
     <a href="https://github.com/SilvaTechB/silva-md-bot" class="btn">Silva MD Bot</a>
     <a href="https://github.com/SilvaTechB/silva-spark-md" class="btn">Silva Spark MD</a>
   </div>
 
+  <!-- Audio Playlist Section -->
+  <div class="audio-playlist">
+    <h3>Audio Playlist</h3>
+    <div class="track">
+      <img src="https://files.catbox.moe/utbujd.jpg" alt="Track 1">
+      <div class="track-details">
+        <p class="title">Track 1</p>
+        <p class="artist">Silva Tech Inc</p>
+      </div>
+    </div>
+    <div class="track">
+      <img src="https://files.catbox.moe/w2j17k.jpg" alt="Track 2">
+      <div class="track-details">
+        <p class="title">Track 2</p>
+        <p class="artist">Silva Tech Inc</p>
+      </div>
+    </div>
+    <!-- Add more tracks as needed -->
+  </div>
+
   <footer>
-    &copy; 2025 Silva Tech Inc | Powered by Silva MD Bot & Silva Spark MD
+    &copy; 2025 Silva Tech Inc. All Rights Reserved.
   </footer>
 </body>
+
 </html>
