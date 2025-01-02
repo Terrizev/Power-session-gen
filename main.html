@@ -104,6 +104,7 @@
       max-width: 600px;
       margin: 30px 0;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      display: none; /* Hides the audio controls */
     }
 
     .audio-playlist h3 {
@@ -125,13 +126,6 @@
       background-color: #333333;
     }
 
-    .track img {
-      width: 50px;
-      height: 50px;
-      border-radius: 4px;
-      margin-right: 15px;
-    }
-
     .track-details {
       flex: 1;
     }
@@ -151,31 +145,6 @@
       color: #b0b0b0;
     }
 
-    .audio-controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 10px;
-    }
-
-    .audio-controls button {
-      background-color: #6a1b9a;
-      color: white;
-      padding: 5px 10px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .audio-controls button:hover {
-      background-color: #8e24aa;
-    }
-
-    .audio-status {
-      font-size: 0.9rem;
-      color: #b0b0b0;
-    }
-
   </style>
 </head>
 <body>
@@ -190,45 +159,83 @@
   <div class="audio-playlist">
     <h3>Audio Playlist</h3>
     <div class="track">
-      <img src="https://files.catbox.moe/utbujd.jpg" alt="Track 1">
       <div class="track-details">
         <p class="title">Track 1</p>
         <p class="artist">Silva Tech Inc</p>
       </div>
-      <div class="audio-controls">
-        <button onclick="playAudio('audio1')">Play</button>
-        <span class="audio-status" id="status1">Not Playing</span>
-      </div>
-      <audio id="audio1" src="https://www.example.com/audio/track1.mp3"></audio>
+      <audio id="audio1" src="https://files.catbox.moe/hpwsi2.mp3"></audio>
     </div>
     <div class="track">
-      <img src="https://files.catbox.moe/w2j17k.jpg" alt="Track 2">
       <div class="track-details">
         <p class="title">Track 2</p>
         <p class="artist">Silva Tech Inc</p>
       </div>
-      <div class="audio-controls">
-        <button onclick="playAudio('audio2')">Play</button>
-        <span class="audio-status" id="status2">Not Playing</span>
+      <audio id="audio2" src="https://files.catbox.moe/xci982.mp3"></audio>
+    </div>
+    <div class="track">
+      <div class="track-details">
+        <p class="title">Track 3</p>
+        <p class="artist">Silva Tech Inc</p>
       </div>
-      <audio id="audio2" src="https://www.example.com/audio/track2.mp3"></audio>
+      <audio id="audio3" src="https://files.catbox.moe/utbujd.mp3"></audio>
+    </div>
+    <div class="track">
+      <div class="track-details">
+        <p class="title">Track 4</p>
+        <p class="artist">Silva Tech Inc</p>
+      </div>
+      <audio id="audio4" src="https://files.catbox.moe/w2j17k.m4a"></audio>
+    </div>
+    <div class="track">
+      <div class="track-details">
+        <p class="title">Track 5</p>
+        <p class="artist">Silva Tech Inc</p>
+      </div>
+      <audio id="audio5" src="https://files.catbox.moe/851skv.m4a"></audio>
+    </div>
+    <div class="track">
+      <div class="track-details">
+        <p class="title">Track 6</p>
+        <p class="artist">Silva Tech Inc</p>
+      </div>
+      <audio id="audio6" src="https://files.catbox.moe/qnhtbu.m4a"></audio>
+    </div>
+    <div class="track">
+      <div class="track-details">
+        <p class="title">Track 7</p>
+        <p class="artist">Silva Tech Inc</p>
+      </div>
+      <audio id="audio7" src="https://files.catbox.moe/lb0x7w.mp3"></audio>
+    </div>
+    <div class="track">
+      <div class="track-details">
+        <p class="title">Track 8</p>
+        <p class="artist">Silva Tech Inc</p>
+      </div>
+      <audio id="audio8" src="https://files.catbox.moe/efmcxm.mp3"></audio>
+    </div>
+    <div class="track">
+      <div class="track-details">
+        <p class="title">Track 9</p>
+        <p class="artist">Silva Tech Inc</p>
+      </div>
+      <audio id="audio9" src="https://files.catbox.moe/gco5bq.mp3"></audio>
+    </div>
+    <div class="track">
+      <div class="track-details">
+        <p class="title">Track 10</p>
+        <p class="artist">Silva Tech Inc</p>
+      </div>
+      <audio id="audio10" src="https://files.catbox.moe/26oeeh.mp3"></audio>
     </div>
     <!-- Add more tracks as needed -->
   </div>
 
   <script>
+    // Function to play the audio in the background without displaying player
     function playAudio(id) {
       var audio = document.getElementById(id);
-      var status = document.getElementById('status' + id.substring(id.length - 1));
-
-      if (audio.paused) {
-        audio.play();
-        status.textContent = 'Now Playing';
-      } else {
-        audio.pause();
-        audio.currentTime = 0;
-        status.textContent = 'Not Playing';
-      }
+      audio.play();
     }
   </script>
 </body>
