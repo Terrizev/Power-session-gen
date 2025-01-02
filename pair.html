@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Silva Tech Pair Code</title>
+  <title>Silva Tech Inc - Pairing Form</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     body {
@@ -12,156 +12,86 @@
       align-items: center;
       height: 100vh;
       margin: 0;
-      background: linear-gradient(135deg, #000000, #434343);
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-    }
-
-    .matrix {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: -1;
-      color: rgba(0, 255, 0, 0.5);
-      font-size: 20px;
-      font-family: monospace;
-    }
-
-    .matrix div {
-      position: absolute;
-      width: 20px;
-      height: 100%;
-      top: 0;
-      animation: matrix-fall linear infinite;
-    }
-
-    @keyframes matrix-fall {
-      0% {
-        top: -100%;
-      }
-      100% {
-        top: 100%;
-      }
+      background: linear-gradient(135deg, #2c3e50, #4ca1af);
+      font-family: 'Roboto', sans-serif;
     }
 
     .container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      z-index: 1;
+      background: #ffffff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 400px;
+      width: 90%;
     }
 
-    .box {
-      width: 300px;
-      height: 320px;
-      padding: 20px;
-      position: relative;
-      text-align: center;
-      background-color: rgb(0, 0, 0);
-      border-radius: 10px;
-      transform: perspective(1000px) rotateY(0deg);
-      box-shadow: 0 0 20px rgba(250, 249, 249, 0.7);
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
     }
 
-    #text {
-      color: #f6f5f5;
+    .logo img {
+      width: 50px;
+      height: 50px;
     }
 
-    .input-container input {
-      color: #f1eaea;
-    }
-
-    .centered-text {
-      color: #e9e4e4;
+    .logo h1 {
+      font-size: 1.5rem;
+      color: #34495e;
+      margin: 0;
     }
 
     .input-container {
       display: flex;
-      background: rgb(10, 10, 10);
-      border-radius: 1rem;
-      background: black;
-      box-shadow: black;
-      padding: 0.3rem;
-      gap: 0.3rem;
-      max-width: 300px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 0.5rem;
+      gap: 0.5rem;
       width: 100%;
+      margin-bottom: 1rem;
     }
 
     .input-container input {
-      border-radius: 0.8rem 0 0 0.8rem;
-      background: #e8e8e8;
-      box-shadow: inset 13px 13px 10px #dcdcdc, inset -13px -13px 10px #f4f4f4;
-      width: 100%;
-      flex-basis: 75%;
-      padding: 1rem;
       border: none;
-      border-left: 2px solid #ecf2f8;
-      color: #000000;
-      transition: all 0.2s ease-in-out;
+      background: none;
+      flex: 1;
+      padding: 0.8rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #333;
     }
 
     .input-container input:focus {
-      border-left: 2px solid #ecf1f6;
-      outline: none;
-      box-shadow: inset 13px 13px 10px #f0f2f3, inset -13px -13px 10px #f4f4f4;
+      outline: 2px solid #3498db;
+      background: #eef5fc;
     }
 
     .input-container button {
-      flex-basis: 15%;
-      padding: 1rem;
-      background: #000000;
-      font-weight: 700;
-      letter-spacing: 0.3rem;
-      text-transform: uppercase;
-      color: white;
-      border: 2px solid red;
-      width: 90%;
-      border-radius: 0 1rem 1rem 0;
-      transition: all 0.2s ease-in-out;
+      padding: 0.8rem 1.2rem;
+      background: #3498db;
+      border: none;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
     }
 
     .input-container button:hover {
-      background-color: red;
-      border-color: green;
+      background: #2980b9;
     }
 
-    @media (max-width: 500px) {
-      .input-container {
-        flex-direction: column;
-      }
-
-      .input-container input {
-        border-radius: 0.8rem;
-      }
-
-      .input-container button {
-        padding: 0.4rem;
-        border-radius: 0.8rem;
-      }
-    }
-
-    .centered-text {
+    .message {
       text-align: center;
-    }
-
-    @media (max-width: 500px) {
-      .box {
-        width: 90%; 
-      }
-    }
-
-    @media (max-width: 500px) {
-      .input-container input {
-        border-radius: 0.8rem;
-        width: 80%; 
-      }
-
-      .input-container button {
-        padding: 1rem;
-        border-radius: 0.9rem;
-        width: 100%; 
-      }
+      color: #2c3e50;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
     }
 
     .loader {
@@ -184,137 +114,68 @@
       }
     }
 
-    .stats {
-      color: #f1f1f1;
+    .footer {
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: #95a5a6;
       text-align: center;
-      margin-bottom: 20px;
     }
 
-    .stats i {
-      margin-right: 5px;
+    .footer a {
+      color: #3498db;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <div class="matrix"></div>
   <div class="container">
-    <div class="stats">
-      <p><i class="fas fa-code-branch"></i> Silva MD: <span id="silva-md-forks">Loading...</span> forks | <span id="silva-md-stars">Loading...</span> stars</p>
-      <p><i class="fas fa-code-branch"></i> Silva Spark MD: <span id="silva-spark-md-forks">Loading...</span> forks | <span id="silva-spark-md-stars">Loading...</span> stars</p>
+    <div class="logo">
+      <img src="https://via.placeholder.com/50" alt="Silva Tech Inc Logo">
+      <h1>Silva Tech Inc</h1>
     </div>
-    <div class="main">
-      <div class="box" id="box">
-        <div id="text">
-          <i class="fa fa-user"></i>
-          <p>
-            <h3 class="centered-text">ALPHA PAIR</h3>
-            <br>
-            <h6>REGARDS KEITHKEIZZAH .</h6>
-            <h6>🗿🗿.</h6>
-            <div class="input-container">
-              <input placeholder="254748387615" type="number" id="number" placeholder="Enter your Phone Number with Country Code" name="">
-              <button id="submit">Submit</button>
-            </div>
-            <div class="loader" id="loader"></div>
-            <a id="waiting-message" class="centered-text" style="display: none;">Please wait a while</a>
-            <br>
-            <br>
-            <main id="pair"></main>
-          </p>
-        </div>
-      </div>
+    <p class="message">Enter your WhatsApp number with country code to generate a pairing code.</p>
+    <div class="input-container">
+      <input type="number" id="number" placeholder="e.g., 254712345678">
+      <button id="submit">Submit</button>
+    </div>
+    <div class="loader" id="loader"></div>
+    <div id="pair"></div>
+    <div class="footer">
+      <p>Powered by Silva Tech Inc</p>
+      <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
     </div>
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
   <script>
-    let a = document.getElementById("pair");
-    let b = document.getElementById("submit");
-    let c = document.getElementById("number");
-    let loader = document.getElementById("loader");
+    const pairElement = document.getElementById('pair');
+    const submitButton = document.getElementById('submit');
+    const numberInput = document.getElementById('number');
+    const loader = document.getElementById('loader');
 
-    async function Copy() {
-      let text = document.getElementById("copy").innerText;
-      let obj = document.getElementById("copy");
-      await navigator.clipboard.writeText(obj.innerText.replace('CODE: ', ''));
-      obj.innerText = "COPIED";
-      obj.style = "color:blue;font-weight:bold";
-      obj.size = "5";
-      setTimeout(() => {
-        obj.innerText = text;
-        obj.style = "color:white;font-weight:bold";
-        obj.size = "5";
-      }, 500);
-    }
-
-    b.addEventListener("click", async (e) => {
+    submitButton.addEventListener('click', async (e) => {
       e.preventDefault();
-      if (!c.value) {
-        a.innerHTML = '<a style="color:white;font-weight:bold">Enter your WhatsApp number with Country Code</a><br><br>';
-      } else if (c.value.replace(/[^0-9]/g, "").length < 11) {
-        a.innerHTML = '<a style="color:red;font-weight:bold">Invalid Number</a><br><br>';
-      } else {
-        loader.style.display = "block";
-        const Wasi_Tech = c.value.replace(/[^0-9]/g, "");
-        let bb = "";
-        let bbc = "";
-        const cc = Wasi_Tech.split('');
-        cc.map(a => {
-          bbc += a;
-          if (bbc.length == 3) {
-            bb += " " + a;
-          } else if (bbc.length == 8) {
-            bb += " " + a;
-          } else {
-            bb += a;
-          }
-        });
-        c.type = "text";
-        c.value = "+" + bb;
-        c.style = "color:black;font-size:20px";
-        a.innerHTML = '<a style="color:white;font-weight:bold">Please Wait...</a><br><br>';
-        let { data } = await axios(`/code?number=${Wasi_Tech}`);
-        loader.style.display = "none";
-        let code = data.code || "Service Unavailable";
-        a.innerHTML = '<font id="copy" onclick="Copy()" style="color:red;font-weight:bold" size="5">CODE: <span style="color:white;font-weight:bold">' + code + '</span></font><br><br><br>';
+      if (!numberInput.value) {
+        pairElement.innerHTML = '<p style="color: red;">Please enter a valid phone number.</p>';
+        return;
+      }
+
+      loader.style.display = 'block';
+      const phoneNumber = numberInput.value.replace(/[^0-9]/g, '');
+      
+      try {
+        const response = await fetch(`/code?number=${phoneNumber}`);
+        const data = await response.json();
+        loader.style.display = 'none';
+        const code = data.code || 'Service Unavailable';
+        pairElement.innerHTML = `<p style="color: green;">Your pairing code is: <strong>${code}</strong></p>`;
+      } catch (error) {
+        loader.style.display = 'none';
+        pairElement.innerHTML = '<p style="color: red;">Error fetching pairing code. Please try again later.</p>';
       }
     });
-
-    function createMatrix() {
-      const matrixContainer = document.querySelector('.matrix');
-      const columns = Math.floor(window.innerWidth / 20);
-      for (let i = 0; i < columns; i++) {
-        const column = document.createElement('div');
-        column.style.left = `${i * 20}px`;
-        column.style.animationDuration = `${Math.random() * 5 + 2}s`;
-        matrixContainer.appendChild(column);
-
-        for (let j = 0; j < 30; j++) {
-          const char = document.createElement('span');
-          char.innerText = String.fromCharCode(0x30A0 + Math.random() * 96);
-          column.appendChild(char);
-        }
-      }
-    }
-
-    async function fetchRepoStats() {
-      try {
-        const silvaMdResponse = await axios.get('https://api.github.com/repos/SilvaTechB/silva-md-bot');
-        document.getElementById('silva-md-forks').innerText = silvaMdResponse.data.forks;
-        document.getElementById('silva-md-stars').innerText = silvaMdResponse.data.stargazers_count;
-
-        const silvaSparkMdResponse = await axios.get('https://api.github.com/repos/SilvaTechB/silva-spark-md');
-        document.getElementById('silva-spark-md-forks').innerText = silvaSparkMdResponse.data.forks;
-        document.getElementById('silva-spark-md-stars').innerText = silvaSparkMdResponse.data.stargazers_count;
-      } catch (error) {
-        document.getElementById('silva-md-forks').innerText = 'Error';
-        document.getElementById('silva-md-stars').innerText = 'Error';
-        document.getElementById('silva-spark-md-forks').innerText = 'Error';
-        document.getElementById('silva-spark-md-stars').innerText = 'Error';
-      }
-    }
-
-    createMatrix();
-    fetchRepoStats();
   </script>
 </body>
 </html>
