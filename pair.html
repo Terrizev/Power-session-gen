@@ -112,16 +112,6 @@
       background-color: #444;
     }
 
-    .repo-info {
-      margin-top: 10px;
-      color: #f4f4f4;
-    }
-
-    .repo-info span {
-      margin: 0 10px;
-      font-size: 1.2rem;
-    }
-
     @media (max-width: 500px) {
       .box {
         padding: 20px;
@@ -153,49 +143,10 @@
           <i class="fab fa-github"></i> View Silva Spark MD
         </a>
       </div>
-
-      <div id="repo-info" class="repo-info">
-        <div id="silva-md-bot-info">
-          <span>Silva MD Bot:</span>
-          <span id="md-bot-forks">Forks: Loading...</span>
-          <span id="md-bot-stars">Stars: Loading...</span>
-        </div>
-        <div id="silva-spark-md-info">
-          <span>Silva Spark MD:</span>
-          <span id="spark-md-forks">Forks: Loading...</span>
-          <span id="spark-md-stars">Stars: Loading...</span>
-        </div>
-      </div>
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
   <script>
-    // GitHub API URLs for both repos
-    const repoUrls = {
-      'silva-md-bot': 'https://api.github.com/repos/SilvaTechB/silva-md-bot',
-      'silva-spark-md': 'https://api.github.com/repos/SilvaTechB/silva-spark-md'
-    };
-
-    // Function to fetch and update the repo data (forks and stars)
-    async function updateRepoInfo() {
-      try {
-        const mdBotResponse = await axios.get(repoUrls['silva-md-bot']);
-        const sparkMdResponse = await axios.get(repoUrls['silva-spark-md']);
-
-        document.getElementById('md-bot-forks').innerText = `Forks: ${mdBotResponse.data.forks_count}`;
-        document.getElementById('md-bot-stars').innerText = `Stars: ${mdBotResponse.data.stargazers_count}`;
-        
-        document.getElementById('spark-md-forks').innerText = `Forks: ${sparkMdResponse.data.forks_count}`;
-        document.getElementById('spark-md-stars').innerText = `Stars: ${sparkMdResponse.data.stargazers_count}`;
-      } catch (error) {
-        console.error('Error fetching repository data:', error);
-      }
-    }
-
-    // Fetch repository data when the page loads
-    window.onload = updateRepoInfo;
-
     // Function to handle phone number submission
     document.getElementById("submit").addEventListener("click", async (e) => {
       e.preventDefault();
