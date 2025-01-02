@@ -48,9 +48,15 @@
 
     .stats {
       display: flex;
-      justify-content: space-around;
+      flex-direction: column;
       width: 100%;
       margin-bottom: 1rem;
+      gap: 1rem;
+    }
+
+    .stat-group {
+      display: flex;
+      justify-content: space-around;
     }
 
     .stat {
@@ -157,13 +163,25 @@
       <h1>Silva Tech Inc</h1>
     </div>
     <div class="stats">
-      <div class="stat">
-        <i class="fas fa-code-branch"></i>
-        <p><strong>Forks:</strong> 120</p>
+      <div class="stat-group">
+        <div class="stat">
+          <i class="fas fa-code-branch"></i>
+          <p><strong>Silva MD Forks:</strong> 120</p>
+        </div>
+        <div class="stat">
+          <i class="fas fa-star"></i>
+          <p><strong>Silva MD Stars:</strong> 250</p>
+        </div>
       </div>
-      <div class="stat">
-        <i class="fas fa-star"></i>
-        <p><strong>Stars:</strong> 250</p>
+      <div class="stat-group">
+        <div class="stat">
+          <i class="fas fa-code-branch"></i>
+          <p><strong>Silva Spark Forks:</strong> 85</p>
+        </div>
+        <div class="stat">
+          <i class="fas fa-star"></i>
+          <p><strong>Silva Spark Stars:</strong> 190</p>
+        </div>
       </div>
     </div>
     <p class="message">Enter your WhatsApp number with country code to generate a pairing code.</p>
