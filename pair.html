@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pair Code</title>
+  <title>Silva Tech Inc - Pair Code</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     body {
@@ -12,7 +12,7 @@
       align-items: center;
       height: 100vh;
       margin: 0;
-      background: linear-gradient(135deg, #000000, #434343);
+      background: linear-gradient(135deg, #2c3e50, #4ca1af);
       overflow: hidden;
       font-family: Arial, sans-serif;
     }
@@ -54,34 +54,28 @@
 
     .box {
       width: 300px;
-      height: 320px;
+      height: 400px;
       padding: 20px;
       position: relative;
       text-align: center;
-      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.8);
       border-radius: 10px;
-      transform: perspective(1000px) rotateY(0deg);
-      box-shadow: 0 0 20px rgba(250, 249, 249, 0.7);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+      color: #f0f0f0;
+    }
+
+    h3, h6 {
+      margin: 0;
     }
 
     #text {
       color: #f6f5f5;
     }
 
-    .input-container input {
-      color: #f1eaea;
-    }
-
-    .centered-text {
-      color: #e9e4e4;
-    }
-
     .input-container {
       display: flex;
-      background: rgb(10, 10, 10);
+      background: rgb(20, 20, 20);
       border-radius: 1rem;
-      background: black;
-      box-shadow: black;
       padding: 0.3rem;
       gap: 0.3rem;
       max-width: 300px;
@@ -96,13 +90,11 @@
       flex-basis: 75%;
       padding: 1rem;
       border: none;
-      border-left: 2px solid #ecf2f8;
       color: #000000;
       transition: all 0.2s ease-in-out;
     }
 
     .input-container input:focus {
-      border-left: 2px solid #ecf1f6;
       outline: none;
       box-shadow: inset 13px 13px 10px #f0f2f3, inset -13px -13px 10px #f4f4f4;
     }
@@ -110,57 +102,32 @@
     .input-container button {
       flex-basis: 15%;
       padding: 1rem;
-      background: #000000;
-      font-weight: 700;
-      letter-spacing: 0.3rem;
-      text-transform: uppercase;
+      background: #3498db;
+      font-weight: bold;
       color: white;
-      border: 2px solid red;
-      width: 90%;
+      border: none;
       border-radius: 0 1rem 1rem 0;
       transition: all 0.2s ease-in-out;
     }
 
     .input-container button:hover {
-      background-color: red;
-      border-color: green;
+      background-color: #2ecc71;
     }
 
-    @media (max-width: 500px) {
-      .input-container {
-        flex-direction: column;
-      }
-
-      .input-container input {
-        border-radius: 0.8rem;
-      }
-
-      .input-container button {
-        padding: 0.4rem;
-        border-radius: 0.8rem;
-      }
+    .stats {
+      margin-top: 20px;
+      color: #f0f0f0;
     }
 
-    .centered-text {
-      text-align: center;
+    .stats div {
+      margin: 5px 0;
+      display: flex;
+      justify-content: space-between;
     }
 
     @media (max-width: 500px) {
       .box {
-        width: 90%; 
-      }
-    }
-
-    @media (max-width: 500px) {
-      .input-container input {
-        border-radius: 0.8rem;
-        width: 80%; 
-      }
-
-      .input-container button {
-        padding: 1rem;
-        border-radius: 0.9rem;
-        width: 100%; 
+        width: 90%;
       }
     }
   </style>
@@ -173,19 +140,33 @@
         <div id="text">
           <i class="fa fa-user"></i>
           <p>
-            <h3 class="centered-text">ALPHA PAIR</h3>
+            <h3 class="centered-text">SILVA TECH INC</h3>
+            <h6 class="centered-text">Innovation at its Best</h6>
             <br>
-            <h6>REGARDS KEITHKEIZZAH .</h6>
-            <h6>🗿🗿.</h6>
             <div class="input-container">
-              <input placeholder="254748387615" type="number" id="number" placeholder="Enter your Phone Number with Country Code" name="">
+              <input placeholder="Enter WhatsApp Number" type="number" id="number">
               <button id="submit">Submit</button>
             </div>
-            
-            <a id="waiting-message" class="centered-text" style="display: none;">Please wait a while</a>
-            <br>
-            <br>
+            <a id="waiting-message" class="centered-text" style="display: none;">Please wait a while...</a>
             <main id="pair"></main>
+            <div class="stats">
+              <div>
+                <span>Silva MD Forks:</span>
+                <span id="silva-md-forks">Loading...</span>
+              </div>
+              <div>
+                <span>Silva MD Stars:</span>
+                <span id="silva-md-stars">Loading...</span>
+              </div>
+              <div>
+                <span>Silva Spark MD Forks:</span>
+                <span id="silva-spark-md-forks">Loading...</span>
+              </div>
+              <div>
+                <span>Silva Spark MD Stars:</span>
+                <span id="silva-spark-md-stars">Loading...</span>
+              </div>
+            </div>
           </p>
         </div>
       </div>
@@ -193,73 +174,43 @@
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
   <script>
-    let a = document.getElementById("pair");
-    let b = document.getElementById("submit");
-    let c = document.getElementById("number");
+    const pair = document.getElementById("pair");
+    const submit = document.getElementById("submit");
+    const number = document.getElementById("number");
 
-    async function Copy() {
-      let text = document.getElementById("copy").innerText;
-      let obj = document.getElementById("copy");
-      await navigator.clipboard.writeText(obj.innerText.replace('CODE: ', ''));
-      obj.innerText = "COPIED";
-      obj.style = "color:blue;font-weight:bold";
-      obj.size = "5";
-      setTimeout(() => {
-        obj.innerText = text;
-        obj.style = "color:white;font-weight:bold";
-        obj.size = "5";
-      }, 500);
-    }
-
-    b.addEventListener("click", async (e) => {
+    submit.addEventListener("click", async (e) => {
       e.preventDefault();
-      if (!c.value) {
-        a.innerHTML = '<a style="color:white;font-weight:bold">Enter your WhatsApp number with Country Code</a><br><br>';
-      } else if (c.value.replace(/[^0-9]/g, "").length < 11) {
-        a.innerHTML = '<a style="color:red;font-weight:bold">Invalid Number</a><br><br>';
+      if (!number.value) {
+        pair.innerHTML = '<a style="color:white; font-weight:bold">Enter your WhatsApp number with Country Code</a><br><br>';
+      } else if (number.value.replace(/[^0-9]/g, "").length < 11) {
+        pair.innerHTML = '<a style="color:red; font-weight:bold">Invalid Number</a><br><br>';
       } else {
-        const Wasi_Tech = c.value.replace(/[^0-9]/g, "");
-        let bb = "";
-        let bbc = "";
-        const cc = Wasi_Tech.split('');
-        cc.map(a => {
-          bbc += a;
-          if (bbc.length == 3) {
-            bb += " " + a;
-          } else if (bbc.length == 8) {
-            bb += " " + a;
-          } else {
-            bb += a;
-          }
-        });
-        c.type = "text";
-        c.value = "+" + bb;
-        c.style = "color:black;font-size:20px";
-        a.innerHTML = '<a style="color:white;font-weight:bold">Please Wait...</a><br><br>';
-        let { data } = await axios(`/code?number=${Wasi_Tech}`);
-        let code = data.code || "Service Unavailable";
-        a.innerHTML = '<font id="copy" onclick="Copy()" style="color:red;font-weight:bold" size="5">CODE: <span style="color:white;font-weight:bold">' + code + '</span></font><br><br><br>';
+        const sanitizedNumber = number.value.replace(/[^0-9]/g, "");
+        pair.innerHTML = '<a style="color:white; font-weight:bold">Please Wait...</a><br><br>';
+        try {
+          const { data } = await axios(`/code?number=${sanitizedNumber}`);
+          pair.innerHTML = `<font id="copy" style="color:red; font-weight:bold" size="5">CODE: <span style="color:white; font-weight:bold">${data.code || "Service Unavailable"}</span></font><br><br>`;
+        } catch (err) {
+          pair.innerHTML = '<a style="color:red; font-weight:bold">Error occurred. Try again later.</a><br><br>';
+        }
       }
     });
 
-    function createMatrix() {
-      const matrixContainer = document.querySelector('.matrix');
-      const columns = Math.floor(window.innerWidth / 20);
-      for (let i = 0; i < columns; i++) {
-        const column = document.createElement('div');
-        column.style.left = `${i * 20}px`;
-        column.style.animationDuration = `${Math.random() * 5 + 2}s`;
-        matrixContainer.appendChild(column);
+    async function fetchRepoStats() {
+      try {
+        const silvaMD = await axios.get('https://api.github.com/repos/SilvaTechB/silva-md-bot');
+        const silvaSparkMD = await axios.get('https://api.github.com/repos/SilvaTechB/silva-spark-md');
 
-        for (let j = 0; j < 30; j++) {
-          const char = document.createElement('span');
-          char.innerText = String.fromCharCode(0x30A0 + Math.random() * 96);
-          column.appendChild(char);
-        }
+        document.getElementById('silva-md-forks').innerText = silvaMD.data.forks_count || '0';
+        document.getElementById('silva-md-stars').innerText = silvaMD.data.stargazers_count || '0';
+        document.getElementById('silva-spark-md-forks').innerText = silvaSparkMD.data.forks_count || '0';
+        document.getElementById('silva-spark-md-stars').innerText = silvaSparkMD.data.stargazers_count || '0';
+      } catch (err) {
+        console.error('Failed to fetch repository stats:', err);
       }
     }
 
-    createMatrix();
+    fetchRepoStats();
   </script>
 </body>
 </html>
