@@ -45,22 +45,22 @@
       margin: 0;
     }
 
-    .stats {
+    .stats, .pairing {
       margin-bottom: 1.5rem;
     }
 
-    .stat {
+    .stat, .pairing {
       margin: 1rem 0;
       color: #2c3e50;
     }
 
-    .stat i {
+    .stat i, .pairing i {
       color: #3498db;
       font-size: 1.5rem;
       margin-bottom: 0.5rem;
     }
 
-    .stat p {
+    .stat p, .pairing p {
       font-size: 1rem;
       margin: 0.5rem 0;
     }
@@ -141,6 +141,19 @@
       <img src="https://via.placeholder.com/50" alt="Silva Tech Inc Logo">
       <h1>Silva Tech Inc</h1>
     </div>
+
+    <!-- Pairing Section -->
+    <div class="pairing">
+      <p class="message">Enter your WhatsApp number with country code to generate a pairing code.</p>
+      <div class="input-container">
+        <input type="number" id="number" placeholder="e.g., 254712345678">
+        <button id="submit">Generate Code</button>
+      </div>
+      <div class="loader" id="loader"></div>
+      <div id="pair" style="color: #2c3e50; font-size: 1rem; margin-top: 1rem;"></div>
+    </div>
+
+    <!-- Stats Section -->
     <div class="stats">
       <div class="stat" id="silva-md-bot">
         <i class="fas fa-code-branch"></i>
@@ -153,18 +166,13 @@
         <p><strong>Silva Spark MD Stars:</strong> <span id="silva-spark-md-stars">Loading...</span></p>
       </div>
     </div>
-    <p class="message">Enter your WhatsApp number with country code to generate a pairing code.</p>
-    <div class="input-container">
-      <input type="number" id="number" placeholder="e.g., 254712345678">
-      <button id="submit">Generate Code</button>
-    </div>
-    <div class="loader" id="loader"></div>
-    <div id="pair" style="color: #2c3e50; font-size: 1rem; margin-top: 1rem;"></div>
+
     <div class="footer">
       <p>Powered by Silva Tech Inc</p>
       <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
     </div>
   </div>
+
   <script>
     // Repositories and owner details
     const repositories = [
