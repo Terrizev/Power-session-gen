@@ -118,10 +118,10 @@ router.get('/', async (req, res) => {
                         contextInfo: {
                             mentionedJid: [userJid], // Mention the sender in the audio message
                             externalAdReply: {
-                                title: 'Thanks for choosing Alpha Md happy deployment 💜',
-                                body: 'Regards Keithkeizzah',
-                                thumbnailUrl: 'https://i.imgur.com/vTs9acV.jpeg',
-                                sourceUrl: 'https://whatsapp.com/channel/0029Vaan9TF9Bb62l8wpoD47',
+                                title: 'Thanks for choosing SILVA session generator happy deployment 💜',
+                                body: 'Regards Sylivanus Momanyi',
+                                thumbnailUrl: 'https://i.imgur.com/g03NTHP.jpeg',
+                                sourceUrl: 'https://whatsapp.com/channel/0029VaAkETLLY6d8qhLmZt2v',
                                 mediaType: 1,
                                 renderLargerThumbnail: true,
                             },
