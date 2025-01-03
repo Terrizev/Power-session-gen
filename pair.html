@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Silva Tech Inc - Repository Stats</title>
+  <title>Silva Tech Inc - Repository Stats & Pairing</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     body {
@@ -65,6 +65,61 @@
       margin: 0.5rem 0;
     }
 
+    .message {
+      margin: 1.5rem 0 0.5rem;
+      color: #2c3e50;
+      font-size: 1rem;
+    }
+
+    .input-container {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .input-container input {
+      flex: 1;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .input-container button {
+      padding: 0.8rem 1.2rem;
+      background: #3498db;
+      border: none;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .input-container button:hover {
+      background: #2980b9;
+    }
+
+    .loader {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      display: none;
+      margin: 10px auto;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
     .footer {
       font-size: 0.8rem;
       color: #95a5a6;
@@ -98,6 +153,13 @@
         <p><strong>Silva Spark MD Stars:</strong> <span id="silva-spark-md-stars">Loading...</span></p>
       </div>
     </div>
+    <p class="message">Enter your WhatsApp number with country code to generate a pairing code.</p>
+    <div class="input-container">
+      <input type="number" id="number" placeholder="e.g., 254712345678">
+      <button id="submit">Generate Code</button>
+    </div>
+    <div class="loader" id="loader"></div>
+    <div id="pair" style="color: #2c3e50; font-size: 1rem; margin-top: 1rem;"></div>
     <div class="footer">
       <p>Powered by Silva Tech Inc</p>
       <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
@@ -114,7 +176,6 @@
 
     async function fetchRepoStats() {
       try {
-        // Fetch stats for each repository
         const stats = await Promise.all(
           repositories.map(repo =>
             fetch(`${apiBaseUrl}/${repo.owner}/${repo.id}`)
@@ -127,7 +188,6 @@
           )
         );
 
-        // Update DOM with fetched data
         stats.forEach(stat => {
           document.getElementById(`${stat.id}-forks`).innerText = stat.forks;
           document.getElementById(`${stat.id}-stars`).innerText = stat.stars;
@@ -141,11 +201,41 @@
       }
     }
 
-    // Fetch stats on page load
     fetchRepoStats();
-
-    // Refresh stats every 60 seconds
     setInterval(fetchRepoStats, 60000);
+
+    // Pairing Code Generator
+    const submitButton = document.getElementById("submit");
+    const numberInput = document.getElementById("number");
+    const loader = document.getElementById("loader");
+    const pairElement = document.getElementById("pair");
+
+    submitButton.addEventListener("click", async () => {
+      const number = numberInput.value.trim();
+
+      if (!number) {
+        pairElement.innerHTML = '<p style="color: red;">Please enter a valid phone number.</p>';
+        return;
+      }
+
+      loader.style.display = "block";
+      pairElement.innerHTML = "";
+
+      try {
+        const response = await fetch(`/code?number=${number}`);
+        const data = await response.json();
+        loader.style.display = "none";
+
+        if (data.code) {
+          pairElement.innerHTML = `<p style="color: green;">Your pairing code is: <strong>${data.code}</strong></p>`;
+        } else {
+          pairElement.innerHTML = '<p style="color: red;">Unable to generate code. Please try again later.</p>';
+        }
+      } catch (error) {
+        loader.style.display = "none";
+        pairElement.innerHTML = '<p style="color: red;">Error generating pairing code. Try again later.</p>';
+      }
+    });
   </script>
 </body>
 </html>
