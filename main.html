@@ -8,14 +8,16 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <style>
     :root {
-      --primary: #6a1b9a;
-      --background: #1a1a1a;
-      --surface: #2d2d2d;
-      --surface-hover: #383838;
-      --text: #ffffff;
-      --text-secondary: #b0b0b0;
-      --success: #4CAF50;
-      --warning: #FFC107;
+      --primary: #7c3aed;
+      --background: #0f172a;
+      --surface: #1e293b;
+      --surface-hover: #334155;
+      --text: #f8fafc;
+      --text-secondary: #94a3b8;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --border-radius: 12px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     * {
@@ -27,22 +29,22 @@
     body {
       background: var(--background);
       color: var(--text);
-      font-family: 'Inter', 'Segoe UI', sans-serif;
+      font-family: 'Segoe UI', system-ui, sans-serif;
       min-height: 100vh;
-      display: grid;
-      grid-template-columns: 250px 1fr;
-      grid-template-rows: 60px 1fr;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
 
     /* Top Bar */
     .top-bar {
-      grid-column: 1 / -1;
       background: var(--surface);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 2rem;
+      padding: 1rem 2rem;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
     .status-widgets {
@@ -51,36 +53,66 @@
       font-size: 0.9rem;
     }
 
-    /* Sidebar */
-    .sidebar {
-      background: var(--surface);
+    /* Main Content */
+    .main-content {
+      flex: 1;
       padding: 2rem;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-    }
-
-    /* Main Content */
-    .main-content {
-      padding: 2rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      align-items: center;
+      justify-content: center;
       gap: 2rem;
-      align-content: start;
+      background: var(--background);
     }
 
-    /* Cards */
-    .card {
-      background: var(--surface);
-      border-radius: 16px;
-      padding: 1.5rem;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    /* Robot Animation */
+    .robot-container {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      margin-bottom: 2rem;
+      animation: float 4s ease-in-out infinite;
     }
 
-    .card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    .robot {
+      width: 100%;
+      height: 100%;
+      background: url('https://www.svgrepo.com/show/303391/robot-solid.svg') no-repeat center;
+      background-size: contain;
+      filter: drop-shadow(0 0 10px rgba(124, 58, 237, 0.5));
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* Silva Tech Inc Animation */
+    .logo-container {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .logo {
+      font-size: 2.5rem;
+      font-weight: bold;
+      background: linear-gradient(45deg, var(--primary), #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      0% {
+        text-shadow: 0 0 5px rgba(124, 58, 237, 0.5);
+      }
+      100% {
+        text-shadow: 0 0 20px rgba(124, 58, 237, 0.8);
+      }
     }
 
     /* Tools Grid */
@@ -88,6 +120,8 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1.5rem;
+      width: 100%;
+      max-width: 800px;
     }
 
     .tool-card {
@@ -97,24 +131,28 @@
       text-align: center;
       padding: 2rem;
       cursor: pointer;
-      border-radius: 12px;
-      background: var(--surface);
-      transition: background 0.2s;
+      border-radius: var(--border-radius);
+      background: rgba(255,255,255,0.05);
+      transition: var(--transition);
     }
 
     .tool-card:hover {
       background: var(--surface-hover);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     }
 
     .tool-card i {
       font-size: 2rem;
       margin-bottom: 1rem;
       color: var(--primary);
+      transition: var(--transition);
     }
 
     /* Music Player */
     .music-player {
-      grid-column: 1 / -1;
+      width: 100%;
+      max-width: 800px;
     }
 
     .track-list {
@@ -126,8 +164,13 @@
       display: flex;
       align-items: center;
       padding: 1rem;
-      border-radius: 12px;
+      border-radius: var(--border-radius);
       background: var(--surface);
+      transition: var(--transition);
+    }
+
+    .track-item:hover {
+      background: var(--surface-hover);
     }
 
     .track-controls {
@@ -156,14 +199,17 @@
     .clock-widget {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      font-family: 'Fira Code', monospace;
+      align-items: flex-start;
     }
 
     .time {
       font-size: 2.5rem;
       letter-spacing: 2px;
       margin-bottom: 0.5rem;
+      font-family: monospace;
+      background: linear-gradient(45deg, var(--primary), #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .date {
@@ -171,60 +217,91 @@
       font-size: 0.9rem;
     }
 
+    /* Status Items */
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+    }
+
     /* Utilities */
     .text-muted {
       color: var(--text-secondary);
     }
 
-    .icon {
-      width: 24px;
-      height: 24px;
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .tools-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .tools-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Top Bar -->
   <div class="top-bar">
     <div class="clock-widget">
       <div class="time" id="current-time">00:00:00</div>
       <div class="date" id="current-date">Loading date...</div>
     </div>
     <div class="status-widgets">
-      <div><i class="fas fa-battery-three-quarters"></i> <span id="battery-status">Loading...</span></div>
-      <div><i class="fas fa-network-wired"></i> <span id="ip-address">IP: Loading...</span></div>
+      <div class="status-item">
+        <i class="fas fa-battery-three-quarters"></i>
+        <span id="battery-status">Loading...</span>
+      </div>
+      <div class="status-item">
+        <i class="fas fa-network-wired"></i>
+        <span id="ip-address">IP: Loading...</span>
+      </div>
     </div>
   </div>
 
-  <nav class="sidebar">
-    <h2 class="text-muted">Navigation</h2>
-    <div class="tool-card" onclick="window.open('/pair', '_self')">
-      <i class="fas fa-link"></i>
-      <h3>Pair Code</h3>
-      <p class="text-muted">Device pairing system</p>
-    </div>
-    <div class="tool-card" onclick="window.open('/qr', '_self')">
-      <i class="fas fa-qrcode"></i>
-      <h3>QR Generator</h3>
-      <p class="text-muted">Create custom QR codes</p>
-    </div>
-  </nav>
-
+  <!-- Main Content -->
   <main class="main-content">
-    <div class="card">
-      <h2>Quick Actions</h2>
-      <div class="tools-grid">
-        <div class="tool-card" onclick="window.open('https://github.com/SilvaTechB/silva-md-bot', '_blank')">
-          <i class="fab fa-github"></i>
-          <h3>MD Bot</h3>
-          <p class="text-muted">Markdown bot repository</p>
-        </div>
-        <div class="tool-card" onclick="window.open('https://github.com/SilvaTechB/silva-spark-md', '_blank')">
-          <i class="fab fa-github"></i>
-          <h3>Spark MD</h3>
-          <p class="text-muted">Lightning-fast markdown</p>
-        </div>
+    <!-- Robot Animation -->
+    <div class="robot-container">
+      <div class="robot"></div>
+    </div>
+
+    <!-- Silva Tech Inc Animation -->
+    <div class="logo-container">
+      <div class="logo">Silva Tech Inc</div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="tools-grid">
+      <div class="tool-card" onclick="window.open('/pair', '_self')">
+        <i class="fas fa-link"></i>
+        <h3>Pair Code</h3>
+        <p class="text-muted">Device pairing system</p>
+      </div>
+      <div class="tool-card" onclick="window.open('/qr', '_self')">
+        <i class="fas fa-qrcode"></i>
+        <h3>QR Generator</h3>
+        <p class="text-muted">Create custom QR codes</p>
+      </div>
+      <div class="tool-card" onclick="window.open('https://github.com/SilvaTechB/silva-md-bot', '_blank')">
+        <i class="fab fa-github"></i>
+        <h3>MD Bot</h3>
+        <p class="text-muted">Markdown bot repository</p>
+      </div>
+      <div class="tool-card" onclick="window.open('https://github.com/SilvaTechB/silva-spark-md', '_blank')">
+        <i class="fab fa-github"></i>
+        <h3>Spark MD</h3>
+        <p class="text-muted">Lightning-fast markdown</p>
       </div>
     </div>
 
+    <!-- Music Player -->
     <div class="card music-player">
       <h2>Music Player</h2>
       <div class="track-list">
@@ -242,13 +319,13 @@
           </div>
           <audio id="audio1" src="https://files.catbox.moe/hpwsi2.mp3"></audio>
         </div>
-        <!-- Repeat for other tracks -->
+        <!-- Add more tracks as needed -->
       </div>
     </div>
   </main>
 
   <script>
-    // Clock Update
+    // Clock
     function updateTime() {
       const now = new Date();
       const time = now.toLocaleTimeString('en-US', { hour12: false });
@@ -288,7 +365,7 @@
       }
     }
 
-    // Audio Controls
+    // Music Player
     function togglePlay(audioId) {
       const audio = document.getElementById(audioId);
       audio.paused ? audio.play() : audio.pause();
