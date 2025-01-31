@@ -9,7 +9,7 @@
     :root {
       --primary: #00ff88;
       --background: #1a1a1a;
-      --surface: #2d2d2d;
+      --surface: rgba(45, 45, 45, 0.7);
       --text: #ffffff;
     }
 
@@ -28,6 +28,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      backdrop-filter: blur(20px);
     }
 
     .container {
@@ -35,151 +36,207 @@
       max-width: 800px;
       display: grid;
       gap: 1.5rem;
+      animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .card {
       background: var(--surface);
-      backdrop-filter: blur(10px);
-      border-radius: 1rem;
-      padding: 1.5rem;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(16px);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
     }
 
     .header {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 1.5rem;
       margin-bottom: 2rem;
     }
 
     .logo {
-      width: 50px;
-      height: 50px;
-      border-radius: 12px;
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      object-fit: cover;
+      border: 2px solid var(--primary);
     }
 
     .user-info {
-      display: flex;
-      gap: 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
       margin-bottom: 2rem;
     }
 
     .info-box {
-      flex: 1;
-      padding: 1rem;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 0.8rem;
+      padding: 1.5rem;
+      background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border-radius: 1rem;
       text-align: center;
+      transition: transform 0.3s ease;
     }
 
     .battery {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 0.75rem;
     }
 
     .battery-level {
-      height: 20px;
-      width: 60px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 4px;
+      height: 24px;
+      width: 72px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
       overflow: hidden;
       position: relative;
+      border: 2px solid rgba(255,255,255,0.1);
     }
 
     .battery-fill {
       height: 100%;
-      background: var(--primary);
-      transition: width 0.3s ease;
+      background: linear-gradient(90deg, var(--primary), #00cc6a);
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
     }
 
     .stat-item {
-      padding: 1rem;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 0.8rem;
+      padding: 1.5rem;
+      background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border-radius: 1rem;
       text-align: center;
+      transition: transform 0.3s ease;
     }
 
     .stat-item i {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       color: var(--primary);
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
     }
 
     .input-group {
       display: flex;
-      gap: 0.5rem;
-      margin: 1rem 0;
+      gap: 1rem;
+      margin: 1.5rem 0;
     }
 
     input {
       flex: 1;
-      padding: 0.8rem;
+      padding: 1rem;
       border: none;
-      border-radius: 0.5rem;
+      border-radius: 0.75rem;
       background: rgba(255, 255, 255, 0.05);
       color: var(--text);
       font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      outline: 2px solid var(--primary);
+      box-shadow: 0 0 16px rgba(0,255,136,0.2);
     }
 
     button {
-      padding: 0.8rem 1.5rem;
+      padding: 1rem 2rem;
       border: none;
-      border-radius: 0.5rem;
-      background: var(--primary);
+      border-radius: 0.75rem;
+      background: linear-gradient(135deg, var(--primary), #00cc6a);
       color: var(--background);
       font-weight: 600;
       cursor: pointer;
-      transition: transform 0.2s ease;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
 
     button:hover {
+      box-shadow: 0 8px 24px rgba(0,255,136,0.3);
       transform: translateY(-2px);
     }
 
     .loader {
       width: 24px;
       height: 24px;
-      border: 3px solid rgba(255, 255, 255, 0.2);
-      border-top-color: var(--primary);
       border-radius: 50%;
+      background: conic-gradient(transparent, var(--primary));
+      mask: radial-gradient(farthest-side,transparent calc(100% - 3px),#fff 0);
       animation: spin 1s linear infinite;
       display: none;
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+    .code-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--surface);
+      padding: 2rem 3rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.3);
+      text-align: center;
+      display: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .code-popup.active {
+      display: block;
+      animation: popIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .code-popup:hover {
+      transform: translate(-50%, -50%) scale(1.02);
+    }
+
+    .code-popup::after {
+      content: "Click to copy";
+      display: block;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.6);
+      margin-top: 1rem;
+      font-weight: normal;
     }
 
     .footer {
       text-align: center;
       margin-top: 2rem;
       color: rgba(255, 255, 255, 0.6);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes popIn {
+      0% { transform: translate(-50%, -50%) scale(0); }
+      90% { transform: translate(-50%, -50%) scale(1.1); }
+      100% { transform: translate(-50%, -50%) scale(1); }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
   </style>
 </head>
 <body>
-     <div class="card">
-      <h2>Device Pairing</h2>
-      <div class="input-group">
-        <input type="tel" id="number" placeholder="WhatsApp number with country code">
-        <button id="submit">
-          <span>Generate Code</span>
-          <div class="loader"></div>
-        </button>
-      </div>
-      <div id="pair-result"></div>
-    </div>
-  </div>
-  
   <div class="container">
     <div class="card">
       <div class="header">
@@ -202,7 +259,19 @@
           </div>
         </div>
       </div>
-
+      
+    <div class="card">
+      <h2>Device Pairing</h2>
+      <div class="input-group">
+        <input type="tel" id="number" placeholder="WhatsApp number with country code">
+        <button id="submit">
+          <span>Generate Code</span>
+          <div class="loader"></div>
+        </button>
+      </div>
+      <div id="pair-result"></div>
+    </div>
+      
       <div class="stats-grid">
         <div class="stat-item">
           <i class="fas fa-code-branch"></i>
@@ -227,9 +296,12 @@
       </div>
     </div>
 
-  <div class="footer">
-    <p>Powered by Silva Tech Inc • <a href="https://silvatechinc.my.id">Privacy</a> | <a href="#">Terms</a></p>
+    <div class="footer">
+      <p>Powered by Silva Tech Inc • <a href="https://silvatechinc.my.id">Privacy</a> | <a href="#">Terms</a></p>
+    </div>
   </div>
+
+  <div class="code-popup" id="codePopup"></div>
 
   <script>
     // User Info
@@ -280,30 +352,46 @@
       }
     }
 
-    // Pairing
+    // Pairing Code Generation
     document.getElementById('submit').addEventListener('click', async function() {
       const button = this;
       const loader = button.querySelector('.loader');
       const number = document.getElementById('number').value.trim();
-      const result = document.getElementById('pair-result');
+      const popup = document.getElementById('codePopup');
 
       if (!number) {
-        result.innerHTML = `<p style="color: #ff4444">Please enter a valid number</p>`;
+        popup.textContent = "Please enter a valid number!";
+        popup.classList.add('active');
+        setTimeout(() => popup.classList.remove('active'), 2000);
         return;
       }
 
+      button.style.opacity = '0.7';
       button.disabled = true;
       loader.style.display = 'inline-block';
 
       try {
+        // Simulated API call - replace with actual endpoint
         const response = await fetch(`/code?number=${number}`);
         const data = await response.json();
-        result.innerHTML = data.code 
-          ? `<p style="color: var(--primary)">Pairing code: <strong>${data.code}</strong></p>`
-          : `<p style="color: #ff4444">Error generating code</p>`;
+        
+        if(data.code) {
+          popup.textContent = data.code;
+          popup.classList.add('active');
+          
+          // Copy to clipboard on click
+          popup.addEventListener('click', () => {
+            navigator.clipboard.writeText(data.code);
+            popup.innerHTML = `${data.code} <i class="fas fa-check" style="margin-left: 1rem; color: var(--primary);"></i>`;
+            setTimeout(() => popup.classList.remove('active'), 2000);
+          });
+        }
       } catch (error) {
-        result.innerHTML = `<p style="color: #ff4444">Connection error</p>`;
+        popup.textContent = "Connection Error!";
+        popup.classList.add('active');
+        setTimeout(() => popup.classList.remove('active'), 2000);
       } finally {
+        button.style.opacity = '1';
         button.disabled = false;
         loader.style.display = 'none';
       }
