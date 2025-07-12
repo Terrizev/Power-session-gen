@@ -2,7 +2,6 @@ import express from 'express';
 import fs from 'fs';
 import pino from 'pino';
 import { makeWASocket, useMultiFileAuthState, delay, makeCacheableSignalKeyStore, Browsers, jidNormalizedUser } from '@whiskeysockets/baileys';
-import { upload } from './mega.js';
 
 const router = express.Router();
 
@@ -71,7 +70,7 @@ router.get('/', async (req, res) => {
             });
 
             if (!GlobalTechInc.authState.creds.registered) {
-                await delay(1000); // Reduced delay to speed up the process
+                await delay(1000);
                 num = num.replace(/[^0-9]/g, '');
                 const code = await GlobalTechInc.requestPairingCode(num);
                 if (!res.headersSent) {
@@ -85,27 +84,18 @@ router.get('/', async (req, res) => {
                 const { connection, lastDisconnect } = s;
 
                 if (connection === "open") {
-                    await delay(2000); // Increased delay to ensure stable connection
-                    const sessionGlobal = fs.readFileSync(dirs + '/creds.json');
-
-                    // Helper to generate a random Mega file ID
-                    function generateRandomId(length = 6, numberLength = 4) {
-                        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-                        let result = '';
-                        for (let i = 0; i < length; i++) {
-                            result += characters.charAt(Math.floor(Math.random() * characters.length));
-                        }
-                        const number = Math.floor(Math.random() * Math.pow(10, numberLength));
-                        return `${result}${number}`;
-                    }
-
-                    // Upload session file to Mega
-                    const megaUrl = await upload(fs.createReadStream(`${dirs}/creds.json`), `${generateRandomId()}.json`);
-                    let stringSession = megaUrl.replace('https://mega.nz/file/', ''); // Extract session ID from URL
-
-                    // Send the session ID to the target number
+                    await delay(2000);
+                    const credsFilePath = `${dirs}/creds.json`;
+                    const sessionData = fs.readFileSync(credsFilePath, 'utf8');
+                    
+                    // Send the creds.json file to the user
                     const userJid = jidNormalizedUser(num + '@s.whatsapp.net');
-                    await GlobalTechInc.sendMessage(userJid, { text: stringSession });
+                    await GlobalTechInc.sendMessage(userJid, {
+                        document: { url: `data:application/json;base64,${Buffer.from(sessionData).toString('base64')}` },
+                        mimetype: 'application/json',
+                        fileName: 'creds.json',
+                        caption: 'Here is your session file. Keep it safe!'
+                    });
 
                     // Send random audio message
                     const randomAudioUrl = getRandomAudioUrl();
@@ -113,10 +103,10 @@ router.get('/', async (req, res) => {
                         audio: { url: randomAudioUrl },
                         mimetype: 'audio/mpeg',
                         ptt: true,
-                        waveform: [100, 0, 100, 0, 100, 0, 100], // Optional waveform pattern
+                        waveform: [100, 0, 100, 0, 100, 0, 100],
                         fileName: 'shizo',
                         contextInfo: {
-                            mentionedJid: [userJid], // Mention the sender in the audio message
+                            mentionedJid: [userJid],
                             externalAdReply: {
                                 title: 'Thanks for choosing SILVA session generator happy deployment 💜',
                                 body: 'Regards Sylivanus Momanyi',
@@ -134,8 +124,8 @@ router.get('/', async (req, res) => {
                     process.exit(0);
                 } else if (connection === 'close' && lastDisconnect && lastDisconnect.error && lastDisconnect.error.output.statusCode !== 401) {
                     console.log('Connection closed unexpectedly:', lastDisconnect.error);
-                    await delay(5000); // Retry after 5 seconds
-                    initiateSession(); // Retry session initiation if needed
+                    await delay(5000);
+                    initiateSession();
                 }
             });
         } catch (err) {
