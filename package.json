@@ -17,7 +17,7 @@
   "license": "ISC",
   "description": "the silent-sobx-md pair",
   "dependencies": {
-    "@whiskeysockets/baileys": "6.7.9",
+    "@whiskeysockets/baileys": "^6.7.18",
     "qrcode": "^1.5.3",
     "awesome-phonenumber": "^2.64.0",
     "pino": "^8.1.0",
