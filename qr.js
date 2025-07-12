@@ -9,7 +9,6 @@ const path = require('path');
 const pino = require("pino");
 const { Boom } = require("@hapi/boom");
 const { toBuffer } = require("qrcode");
-const { upload } = require('./mega'); // your upload function
 const {
   default: SuhailWASocket,
   useMultiFileAuthState,
@@ -28,6 +27,7 @@ const PORT = process.env.PORT || 3000;
 // Global variable to hold the latest QR code buffer and session status
 let latestQRBuffer = null;
 let sessionStatus = "Waiting for QR Code...";
+let clientSocket = null;
 
 // Clean auth folder on startup
 const authDir = path.join(__dirname, 'auth_info_baileys');
@@ -52,6 +52,8 @@ const startWhatsAppSession = async () => {
       auth: state
     });
 
+    clientSocket = Smd; // Store the socket globally
+
     // Listen to connection events
     Smd.ev.on("connection.update", async (update) => {
       const { connection, lastDisconnect, qr } = update;
@@ -74,29 +76,20 @@ const startWhatsAppSession = async () => {
         await delay(3000);
         const user = Smd.user.id;
 
-        // Generate a random session ID (as in your original code)
-        const randomMegaId = (length = 6, numberLength = 4) => {
-          const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-          let result = '';
-          for (let i = 0; i < length; i++) {
-            result += characters.charAt(Math.floor(Math.random() * characters.length));
-          }
-          const number = Math.floor(Math.random() * Math.pow(10, numberLength));
-          return `${result}${number}`;
-        };
-
-        // Upload your credentials file (for example, creds.json)
+        // Read the creds.json file
         const authFilePath = path.join(authDir, 'creds.json');
-        const mega_url = await upload(fs.createReadStream(authFilePath), `${randomMegaId()}.json`);
-        const sessionID = mega_url.replace('https://mega.nz/file/', '');
-        console.log(`
-====================  SESSION ID  ==========================
-SESSION-ID ==> ${sessionID}
--------------------   SESSION CLOSED   -----------------------
-        `);
+        const sessionData = fs.readFileSync(authFilePath, 'utf8');
 
-        // Send session messages to the connected WhatsApp user
-        const msgSession = await Smd.sendMessage(user, { text: sessionID });
+        // Send the creds.json file to the user
+        await Smd.sendMessage(user, {
+          document: { 
+            url: `data:application/json;base64,${Buffer.from(sessionData).toString('base64')}` 
+          },
+          mimetype: 'application/json',
+          fileName: 'creds.json',
+          caption: 'Here is your WhatsApp session file. Keep it safe!'
+        });
+
         const MESSAGE = process.env.MESSAGE || `
 *🎉 SESSION GENERATED SUCCESSFULLY! ✅*
 
@@ -114,7 +107,7 @@ https://whatsapp.com/channel/0029VaAkETLLY6d8qhLmZt2d
 *🥀 Powered by Silva MD Bot & Silva Tech Inc 🥀*
 *Together, we build the future of automation! 🚀*
         `;
-        await Smd.sendMessage(user, { text: MESSAGE }, { quoted: msgSession });
+        await Smd.sendMessage(user, { text: MESSAGE });
         await delay(1000);
         try {
           await fs.emptyDirSync(authDir);
@@ -311,6 +304,16 @@ app.get('/qr', (req, res) => {
 // Optional: API endpoint to check the session status
 app.get('/status', (req, res) => {
   res.json({ status: sessionStatus });
+});
+
+// Endpoint to download the creds.json file if available
+app.get('/creds', (req, res) => {
+  const authFilePath = path.join(authDir, 'creds.json');
+  if (fs.existsSync(authFilePath)) {
+    res.download(authFilePath, 'creds.json');
+  } else {
+    res.status(404).send('Session file not available yet');
+  }
 });
 
 // Start Express server
